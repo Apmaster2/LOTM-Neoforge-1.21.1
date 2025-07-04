@@ -1,5 +1,6 @@
 package net.ap.lotm;
 
+import net.ap.lotm.register.AttachmentRegistry;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -29,6 +30,9 @@ public class Lotm {
         modContainer.registerConfig(ModConfig.Type.COMMON, LotmConfig.SPEC);
 
 
+        // Registry
+        AttachmentRegistry.register(modEventBus);
+
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -40,7 +44,7 @@ public class Lotm {
     public void onServerStarting(ServerStartingEvent event) {
     }
 
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
