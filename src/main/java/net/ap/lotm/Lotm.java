@@ -1,6 +1,7 @@
 package net.ap.lotm;
 
 import net.ap.lotm.register.AttachmentRegistry;
+import net.ap.lotm.register.ItemRegistry;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -32,6 +33,7 @@ public class Lotm {
 
         // Registry
         AttachmentRegistry.register(modEventBus);
+        ItemRegistry.register(modEventBus);
 
     }
 
@@ -42,6 +44,7 @@ public class Lotm {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+
     }
 
     @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
