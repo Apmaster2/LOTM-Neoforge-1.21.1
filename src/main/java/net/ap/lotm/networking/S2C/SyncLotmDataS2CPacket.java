@@ -25,7 +25,7 @@ public record SyncLotmDataS2CPacket(CompoundTag nbt) implements CustomPacketPayl
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
-        return type();
+        return TYPE;
     }
 
     public void handle(IPayloadContext ctx) {

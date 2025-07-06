@@ -1,8 +1,12 @@
 package net.ap.lotm.data;
 
+import net.ap.lotm.networking.S2C.SyncLotmDataS2CPacket;
+import net.ap.lotm.register.CapabilityRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.UnknownNullability;
 
 public class LotmData implements ILotmData {

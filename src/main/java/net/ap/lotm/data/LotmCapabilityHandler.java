@@ -44,7 +44,7 @@ public class LotmCapabilityHandler {
 
         if(cap == null) return;
 
-        //PacketDistributor.sendToPlayer(player, new SyncLotmDataS2CPacket(cap.serializeNBT(player.registryAccess())));
+        PacketDistributor.sendToPlayer(player, new SyncLotmDataS2CPacket(cap.serializeNBT(player.registryAccess())));
     }
 
 
