@@ -7,10 +7,6 @@ public interface ILotmData extends INBTSerializable<CompoundTag> {
 
     void tick();
 
-    int getAge();
-
-    void setAge(int age);
-
     void gen();
 
 

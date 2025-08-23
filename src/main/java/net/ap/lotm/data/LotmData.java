@@ -1,7 +1,7 @@
 package net.ap.lotm.data;
 
 import net.ap.lotm.networking.S2C.SyncLotmDataS2CPacket;
-import net.ap.lotm.register.CapabilityRegistry;
+import net.ap.lotm.register.AttachmentRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,7 +13,6 @@ public class LotmData implements ILotmData {
 
     private final LivingEntity entity;
     private boolean initialized;
-    private int age;
 
     public LotmData(LivingEntity entity) {
         this.entity = entity;
@@ -29,20 +28,15 @@ public class LotmData implements ILotmData {
 
     }
 
-    @Override
-    public int getAge() {
-        return this.age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     @Override
     public void gen() {
         this.initialized = true;
-        this.age = (int) (Math.random() * 100);
+
+        if(this.entity instanceof ServerPlayer serverPlayer) {
+            PacketDistributor.sendToPlayer(serverPlayer, new SyncLotmDataS2CPacket(this.serializeNBT(serverPlayer.registryAccess())));
+        }
+
     }
 
     @Override
@@ -50,7 +44,6 @@ public class LotmData implements ILotmData {
         CompoundTag tag = new CompoundTag();
 
         tag.putBoolean("init", this.initialized);
-        tag.putInt("age", this.age);
 
         return tag;
     }
@@ -59,7 +52,6 @@ public class LotmData implements ILotmData {
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag tag) {
 
         this.initialized = tag.getBoolean("init");
-        this.age = tag.getInt("age");
 
     }
 

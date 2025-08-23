@@ -2,7 +2,7 @@ package net.ap.lotm.data;
 
 import net.ap.lotm.Lotm;
 import net.ap.lotm.networking.S2C.SyncLotmDataS2CPacket;
-import net.ap.lotm.register.CapabilityRegistry;
+import net.ap.lotm.register.AttachmentRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -12,7 +12,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = Lotm.MOD_ID)
-public class LotmCapabilityHandler {
+public class LotmDataHandler {
 
 
     @SubscribeEvent
@@ -23,12 +23,10 @@ public class LotmCapabilityHandler {
         if(player.isDeadOrDying()) return;
 
 
-        ILotmData cap = player.getCapability(CapabilityRegistry.LOTM_CAPABILITY);
-
-        if(cap == null) return;
+        ILotmData data = player.getData(AttachmentRegistry.LOTM_DATA_ATTACHMENT);
 
 
-        cap.tick();
+        data.tick();
 
     }
 
@@ -40,11 +38,10 @@ public class LotmCapabilityHandler {
         if(!(event.getEntity() instanceof ServerPlayer player)) return;
 
 
-        ILotmData cap = player.getCapability(CapabilityRegistry.LOTM_CAPABILITY);
+        ILotmData data = player.getData(AttachmentRegistry.LOTM_DATA_ATTACHMENT);
 
-        if(cap == null) return;
 
-        PacketDistributor.sendToPlayer(player, new SyncLotmDataS2CPacket(cap.serializeNBT(player.registryAccess())));
+        PacketDistributor.sendToPlayer(player, new SyncLotmDataS2CPacket(data.serializeNBT(player.registryAccess())));
     }
 
 
@@ -53,9 +50,8 @@ public class LotmCapabilityHandler {
 
         Player old = event.getEntity();
 
-        ILotmData cap = old.getCapability(CapabilityRegistry.LOTM_CAPABILITY);
+        ILotmData data = old.getData(AttachmentRegistry.LOTM_DATA_ATTACHMENT);
 
-        if(cap == null) return;
 
         if(event.isWasDeath()) {
 
@@ -69,11 +65,10 @@ public class LotmCapabilityHandler {
 
         if(!(event.getEntity() instanceof ServerPlayer player)) return;
 
-        ILotmData cap = player.getCapability(CapabilityRegistry.LOTM_CAPABILITY);
+        ILotmData data = player.getData(AttachmentRegistry.LOTM_DATA_ATTACHMENT);
 
-        if(cap == null) return;
 
-        PacketDistributor.sendToPlayer(player, new SyncLotmDataS2CPacket(cap.serializeNBT(player.registryAccess())));
+        PacketDistributor.sendToPlayer(player, new SyncLotmDataS2CPacket(data.serializeNBT(player.registryAccess())));
     }
 
 
@@ -82,11 +77,9 @@ public class LotmCapabilityHandler {
 
         if(!(event.getEntity() instanceof ServerPlayer player)) return;
 
-        ILotmData cap = player.getCapability(CapabilityRegistry.LOTM_CAPABILITY);
+        ILotmData data = player.getData(AttachmentRegistry.LOTM_DATA_ATTACHMENT);
 
-        if(cap == null) return;
-
-        PacketDistributor.sendToPlayer(player, new SyncLotmDataS2CPacket(cap.serializeNBT(player.registryAccess())));
+        PacketDistributor.sendToPlayer(player, new SyncLotmDataS2CPacket(data.serializeNBT(player.registryAccess())));
     }
 
 

@@ -2,8 +2,7 @@ package net.ap.lotm.networking.S2C;
 
 import net.ap.lotm.Lotm;
 import net.ap.lotm.data.ILotmData;
-import net.ap.lotm.data.LotmCapabilityHandler;
-import net.ap.lotm.register.CapabilityRegistry;
+import net.ap.lotm.register.AttachmentRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -35,11 +34,9 @@ public record SyncLotmDataS2CPacket(CompoundTag nbt) implements CustomPacketPayl
 
             if(player == null) return;
 
-            ILotmData cap = player.getCapability(CapabilityRegistry.LOTM_CAPABILITY);
+            ILotmData data = player.getData(AttachmentRegistry.LOTM_DATA_ATTACHMENT);
 
-            if(cap == null) return;
-
-            cap.deserializeNBT(player.registryAccess(), nbt);
+            data.deserializeNBT(player.registryAccess(), nbt);
 
         });
     }
