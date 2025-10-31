@@ -1,7 +1,10 @@
 package net.ap.lotm;
 
+import net.ap.lotm.client.LotmClientAbilityHandler;
 import net.ap.lotm.register.AttachmentRegistry;
 import net.ap.lotm.register.ItemRegistry;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -17,6 +20,8 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+
+import java.awt.*;
 
 @Mod(Lotm.MOD_ID)
 public class Lotm {
@@ -34,6 +39,11 @@ public class Lotm {
         // Registry
         AttachmentRegistry.register(modEventBus);
         ItemRegistry.register(modEventBus);
+
+
+        LotmClientAbilityHandler.addCombo("ZXCV", player -> {
+            player.sendSystemMessage(Component.literal("ZXCV COMBO ACTIVATED!").withStyle(ChatFormatting.RED));
+        });
 
     }
 

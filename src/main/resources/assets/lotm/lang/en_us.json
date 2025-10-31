@@ -1,5 +1,10 @@
 {
 
+  "key.category.lotm": "Lotm Keybindings",
+  "key.lotm.ability_symbol_1": "Ability Symbol 1",
+  "key.lotm.ability_symbol_2": "Ability Symbol 2",
+  "key.lotm.ability_symbol_3": "Ability Symbol 3",
+  "key.lotm.ability_symbol_4": "Ability Symbol 4",
   "item.lotm.potion": "Potion"
 
 }
