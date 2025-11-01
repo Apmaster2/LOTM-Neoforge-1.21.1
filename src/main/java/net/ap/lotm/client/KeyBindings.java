@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.ap.lotm.Lotm;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -64,6 +65,7 @@ public class KeyBindings {
         Player player = Minecraft.getInstance().player;
 
 
+
         if(player == null) return;
 
 
@@ -80,6 +82,9 @@ public class KeyBindings {
             LotmClientAbilityHandler.addBufferKey('V');
         }
 
+
+
     }
+
 
 }
